@@ -502,6 +502,21 @@
             transform: scale(1.1); /* Slight pop */
         }
         .skill-tag:hover i { color: white; }
+        /* --- Local Time --- */
+        .location-time {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .location-time #local-time {
+            color: var(--accent);
+            font-weight: 600;
+        }
 
         /* --- Unified Mobile Responsiveness --- */
         @media (max-width: 768px) {
@@ -627,16 +642,16 @@
                 <span class="section-label">[ My Experience ]</span>
                 <div class="timeline-list">
                     <div class="timeline-item">
-                        <span class="t-date">2023 - Present</span>
-                        <h3 class="t-title">AI/ML Engineer</h3>
-                        <p class="t-sub">Freelance & Personal Projects</p>
-                        <p class="t-desc">Developing machine learning models and AI solutions for various applications including natural language processing, computer vision, and predictive analytics. Working on end-to-end AI projects from data collection to deployment.</p>
+                        <span class="t-date">Jul 2026 - Present</span>
+                        <h3 class="t-title">Machine Learning Engineering Intern</h3>
+                        <p class="t-sub">FlyRank AI</p>
+                        <p class="t-desc">Contributing to the development of AI-powered solutions by building and improving machine learning workflows. Working with Python, data preprocessing, model experimentation, and production-ready ML pipelines while collaborating with the engineering team. Gaining hands-on experience in developing scalable AI applications, writing clean and maintainable code, and applying industry best practices in machine learning.</p>
                     </div>
                     <div class="timeline-item">
-                        <span class="t-date">2022 - 2023</span>
-                        <h3 class="t-title">Front-End Web Developer</h3>
+                        <span class="t-date">Jul 2022 - Aug 2022</span>
+                        <h3 class="t-title">Front-End Web Developer Intern</h3>
                         <p class="t-sub">Wainfo Technologies</p>
-                        <p class="t-desc">Designed and developed a responsive online shopping platform featuring secure user account management and intuitive product search.</p>
+                        <p class="t-desc">Designed and developed responsive web interfaces with a focus on usability and performance. Worked on implementing interactive UI components, improving website responsiveness, and maintaining clean, reusable code while collaborating with senior developers on real-world web development projects.</p>
                     </div>
                 </div>
             </div>
@@ -693,7 +708,10 @@
 
             <div class="footer-links">
                 <div>© 2026 Zahed Shaikh</div>
-                <div id="local-time" style="color: var(--accent);"></div>
+                <div class="location-time">
+                    <span>📍 India •</span>
+                    <span id="local-time"></span>
+                </div>
             </div>
 
             <!-- UFO Footer Marquee -->
@@ -842,14 +860,20 @@
 
         // --- 7. Local Time ---
         function updateTime() {
-            const timeEl = document.getElementById('local-time');
-            if(timeEl) {
-                const now = new Date();
-                timeEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-            }
+            const now = new Date();
+
+            const time = now.toLocaleTimeString("en-IN", {
+                timeZone: "Asia/Kolkata",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            });
+
+            document.getElementById("local-time").textContent = `${time} IST`;
         }
-        setInterval(updateTime, 1000);
+
         updateTime();
+        setInterval(updateTime, 1000);
 
         // --- 7. Footer Marquee Animation ---
         const marqueeTrack = document.querySelector('.marquee-track');

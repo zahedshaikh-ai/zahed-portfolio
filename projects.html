@@ -312,7 +312,21 @@
             text-shadow: 0 0 5px cyan;
             -webkit-text-stroke: 0px; /* Reset header style */
         }
+        /* --- Local Time --- */
+        .location-time {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
 
+        .location-time #local-time {
+            color: var(--accent);
+            font-weight: 600;
+        }
         /* --- Unified Mobile Responsiveness --- */
         @media(max-width: 768px) {
             /* General */
@@ -558,7 +572,10 @@
 
             <div class="footer-links">
                 <div>© 2026 Zahed Shaikh</div>
-                <div id="local-time" style="color: var(--accent);"></div>
+                <div class="location-time">
+                    <span>📍 India •</span>
+                    <span id="local-time"></span>
+                </div>
             </div>
 
             <!-- UFO Footer Marquee -->
@@ -698,14 +715,20 @@
 
         // --- 6. Local Time ---
         function updateTime() {
-            const timeEl = document.getElementById('local-time');
-            if(timeEl) {
-                const now = new Date();
-                timeEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-            }
+            const now = new Date();
+
+            const time = now.toLocaleTimeString("en-IN", {
+                timeZone: "Asia/Kolkata",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            });
+
+            document.getElementById("local-time").textContent = `${time} IST`;
         }
-        setInterval(updateTime, 1000);
+
         updateTime();
+        setInterval(updateTime, 1000);
 
         // --- 7. Footer Marquee Animation ---
         const marqueeTrack = document.querySelector('.marquee-track');
